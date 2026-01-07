@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.hilt)
+    alias(libs.plugins.org.jetbrains.kotlin.kapt)
     alias(libs.plugins.kotlin.compose)
+
 }
 
 android {
@@ -27,17 +30,19 @@ android {
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            buildConfigField("String", "BASE_URL",  "\"https://rickandmortyapi.com/api/\"")
+        }
+        debug {
+            buildConfigField("String", "BASE_URL",  "\"https://rickandmortyapi.com/api/\"")
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -53,7 +58,13 @@ dependencies {
     implementation(libs.coil.compose)
     implementation(libs.retrofit.version)
     implementation(libs.retrofit.jackson.version)
-
+    implementation(libs.androidx.navigation.runtime.ktx)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.hilt.android)
+    implementation(libs.ok.http.interceptor)
+    kapt(libs.hilt.compiler)
+    implementation(libs.androidx.navigation.navigation.hilt)
+    kapt(libs.hilt.compiler)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -61,4 +72,7 @@ dependencies {
     androidTestImplementation(libs.androidx.compose.ui.test.junit4)
     debugImplementation(libs.androidx.compose.ui.tooling)
     debugImplementation(libs.androidx.compose.ui.test.manifest)
+}
+kapt {
+    correctErrorTypes = true
 }
