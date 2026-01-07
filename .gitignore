@@ -1,0 +1,102 @@
+# Configuración de Android Studio
+/.idea
+.DS_Store
+*.iml
+local.properties
+*.hprof
+.cxx/
+
+# Archivos generados por Gradle
+.gradle
+/build
+/captures
+.AndroidStudio*
+/.idea/caches/
+/.idea/libraries/
+/.idea/modules.xml
+/.idea/workspace.xml
+/.idea/navEditor.xml
+/.idea/assetWizardSettings.xml
+
+# Archivos de build de Gradle
+*.apk
+*.aar
+*.ap_
+*.aab
+
+# Archivos de output de lint
+/lint/
+/lint-report.html
+
+# Configuración específica de Android
+# Intermediate files
+/bin/
+/gen/
+/release/
+
+# Ejecutables de Java
+*.class
+
+# Archivos de log
+*.log
+
+# Configuración de Kotlin
+# Archivos compilados de Kotlin
+*.kotlin_module
+
+# Configuración de Jetpack Compose
+# Previews de Compose (pueden contener datos sensibles)
+/.idea/previews/
+
+# Configuración de pruebas
+# Resultados de pruebas
+/androidTest/**
+/testResults/
+
+# Archivos temporales
+*.tmp
+*.bak
+*.swp
+*~.nib
+
+# Configuración de keystore
+*.jks
+*.keystore
+
+# Configuración de Firebase y servicios
+google-services.json
+GoogleService-Info.plist
+
+# Archivos de configuración de entorno
+.env
+.env.local
+.env.development
+.env.production
+
+# Archivos de debug
+debug.keystore
+
+# Configuración de sistema operativo
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+Icon
+._*
+
+# Thumbnails
+._*
+
+# Archivos que pueden aparecer en el disco externo del usuario
+.Spotlight-V100
+.Trashes
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Archivos de usuario de Android Studio
+/.idea/runConfigurations/
+/.idea/shelf/
+/.idea/vcs.xml
