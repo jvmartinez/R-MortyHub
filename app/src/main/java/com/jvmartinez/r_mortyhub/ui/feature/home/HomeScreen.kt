@@ -1,6 +1,5 @@
 package com.jvmartinez.r_mortyhub.ui.feature.home
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -22,6 +21,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jvmartinez.r_mortyhub.R
@@ -36,6 +36,7 @@ import com.jvmartinez.r_mortyhub.ui.theme.VibrantCyan
 @Composable
 fun HomeScreen(viewModel: HomeViewModel) {
     val state by viewModel.homeState.collectAsStateWithLifecycle()
+    val isLoading by viewModel.isLoading.collectAsStateWithLifecycle()
 
     LaunchedEffect(Unit) {
         viewModel.getCharacters()
@@ -46,7 +47,7 @@ fun HomeScreen(viewModel: HomeViewModel) {
             .fillMaxSize()
             .background(VibrantCyan),
     ) { paddingValues ->
-        Body(paddingValues, viewModel, state)
+        Body(paddingValues, viewModel, state, isLoading)
     }
 }
 
@@ -54,7 +55,8 @@ fun HomeScreen(viewModel: HomeViewModel) {
 private fun Body(
     paddingValues: PaddingValues,
     viewModel: HomeViewModel,
-    state: StatusData<HomeUiState>
+    state: StatusData<HomeUiState>,
+    isLoading: Boolean
 ) {
     var pageCurrency by remember { mutableIntStateOf(1) }
 
@@ -70,7 +72,7 @@ private fun Body(
                 }
             }
 
-            StatusData.Empty, StatusData.Loading -> {
+            StatusData.Loading -> {
                 if (pageCurrency == 1) {
                     Box(
                         modifier = Modifier.fillMaxSize(),
@@ -92,7 +94,8 @@ private fun Body(
                     itemContent = { item ->
                         CharacterItem(item.image, item.name, item.status)
                         Spacer(modifier = Modifier.height(8.dp))
-                    }
+                    },
+                    isLoading = isLoading
                 )
             }
         }
@@ -113,11 +116,11 @@ fun NotificationError(
                 .size(80.dp)
                 .align(Alignment.CenterHorizontally),
             painter = painterResource(id = R.drawable.ic_morty_smith),
-            contentDescription = "notification de error"
+            contentDescription = stringResource(R.string.error_notification)
         )
         Spacer(modifier = Modifier.height(20.dp))
         ButtonComponent(
-            titleButton = "Reintentar",
+            titleButton = stringResource(id = R.string.retry),
             isEnabled = true,
             action = { action() }
         )

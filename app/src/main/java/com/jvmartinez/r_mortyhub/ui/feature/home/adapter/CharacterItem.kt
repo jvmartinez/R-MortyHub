@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,11 +36,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import coil.compose.SubcomposeAsyncImageContent
+import com.jvmartinez.r_mortyhub.R
 import com.jvmartinez.r_mortyhub.ui.theme.LucerneLight
-import kotlinx.coroutines.delay
 
 @Composable
-fun ShimmerBox(modifier: Modifier = Modifier) {
+private fun ShimmerBox(modifier: Modifier = Modifier) {
     val infiniteTransition = rememberInfiniteTransition(label = "shimmer")
     val shimmerAnimation = infiniteTransition.animateFloat(
         initialValue = -1f,
@@ -82,7 +83,7 @@ fun CharacterItem(
         ) {
             SubcomposeAsyncImage(
                 model = imageUrl,
-                contentDescription = "Character image",
+                contentDescription = stringResource(R.string.character_image),
                 modifier = Modifier.fillMaxSize(),
                 loading = {
                     ShimmerBox(modifier = Modifier.fillMaxSize())
@@ -109,7 +110,7 @@ fun CharacterItem(
         ) {
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "name: $name",
+                text = stringResource(R.string.name_label) + name,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White,
@@ -118,7 +119,7 @@ fun CharacterItem(
             Spacer(Modifier.height(20.dp))
             Text(
                 modifier = Modifier.fillMaxWidth(),
-                text = "status: $status",
+                text = stringResource(R.string.status_label) + status,
                 fontSize = 16.sp,
                 fontWeight = FontWeight.SemiBold,
                 color = Color.White,

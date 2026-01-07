@@ -13,7 +13,7 @@ fun CharacterListHome(
     items: List<Character>,
     loadMorePage: () -> Unit,
     itemContent: @Composable (item: Character) -> Unit,
-    threshold: Int = 5,
+    threshold: Int = 10,
     isLoading: Boolean = false
 ) {
     val listState = rememberLazyListState()
@@ -24,7 +24,7 @@ fun CharacterListHome(
                 if (visibleItems.isNotEmpty()) {
                     val lastVisibleIndex = visibleItems.last().index
                     val totalItems = listState.layoutInfo.totalItemsCount
-                    if (lastVisibleIndex >= totalItems - threshold - 1 && !isLoading) {
+                    if (lastVisibleIndex >= totalItems - threshold && !isLoading) {
                         loadMorePage()
                     }
                 }

@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">R-MortyHub</string>
+    <string name="error_notification">Error notification</string>
+    <string name="retry">Retry</string>
+    <string name="retry_error">Retry Error</string>
+    <string name="name_label">Name: </string>
+    <string name="status_label">Status: </string>
+    <string name="character_image">Character image</string>
 </resources>

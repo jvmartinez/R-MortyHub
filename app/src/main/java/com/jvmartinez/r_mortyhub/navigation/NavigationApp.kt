@@ -18,13 +18,16 @@ fun NavigationApp() {
 
     NavHost(
         navController = navController,
-        startDestination = NavigateRoute.HomeScreen.route
+        startDestination = NavigateRoute.SplashScreen.route
     ) {
         composable(NavigateRoute.SplashScreen.route) {
             val navigateToHome = {
                 navController.navigate(NavigateRoute.HomeScreen.route)
             }
-            SplashScreen(navigateToHome)
+            SplashScreen(
+                viewModel = hiltViewModel(),
+                navigateToHome
+            )
         }
         composable(NavigateRoute.HomeScreen.route) {
             HomeScreen(

@@ -11,18 +11,31 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.lifecycle.viewmodel.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.jvmartinez.r_mortyhub.R
 import com.jvmartinez.r_mortyhub.component.loading.LoadingComponent
-import com.jvmartinez.r_mortyhub.ui.theme.LucerneLight
 import com.jvmartinez.r_mortyhub.ui.theme.VibrantCyan
 
 @Composable
-fun SplashScreen(navigateToHome: () -> Unit) {
+fun SplashScreen(
+    viewModel: SplashViewModel,
+    navigateToHome: () -> Unit
+) {
+    val loading by viewModel.isLoading.collectAsStateWithLifecycle()
+
+    LaunchedEffect(loading) {
+        if (!loading) {
+            navigateToHome()
+        }
+    }
     Scaffold { paddingValues ->
         Box(
             modifier = Modifier
@@ -54,5 +67,5 @@ private fun SplashScreenContent() {
 @Preview
 @Composable
 fun SplashScreenPreview() {
-    SplashScreen( {})
+    SplashScreen(hiltViewModel(),{})
 }
